@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GTA MARKET</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: linear-gradient(120deg, #1a1a1a, #333333);
+            color: white;
+            direction: ltr;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* שורת ניווט */
+        .navbar {
+            position: absolute;
+            top: 20px;
+            width: 100%;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            margin: 0 20px;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .navbar a:hover {
+            background-color: #ff5733;
+        }
+
+        .welcome-container {
+            font-size: 50px;
+            font-weight: 600;
+            letter-spacing: 5px;
+            margin-top: 70px;
+        }
+
+        .letter {
+            opacity: 0;
+            display: inline-block;
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .footer-text {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #ddd;
+            opacity: 0;
+            animation: showFooter 2s forwards;
+            animation-delay: 7s;
+        }
+
+        @keyframes showFooter {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* עיצוב של עמוד השאלות */
+        .questions-page {
+            display: none;
+            background-color: #222;
+            padding: 50px;
+            margin-top: 80px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            margin: auto;
+            color: white;
+        }
+
+        .questions-page.active {
+            display: block;
+        }
+
+        .question-item {
+            margin-bottom: 20px;
+            font-size: 18px;
+            text-align: left;
+        }
+
+        .question-item input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #333;
+            color: white;
+        }
+
+        .submit-button {
+            background-color: #ff5733;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background-color: #c4411f;
+        }
+
+        /* עיצוב עמוד ה-Store */
+        .store-page {
+            display: none;
+            background-color: #222;
+            padding: 50px;
+            margin-top: 80px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .store-page.active {
+            display: block;
+        }
+
+        .store-item {
+            background-color: #333;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .store-item h3 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        /* כפתור גלילה */
+        .scroll-button {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 15px 30px;
+            background-color: #ff5733;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .scroll-button:hover {
+            background-color: #c4411f;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- שורת ניווט -->
+    <div class="navbar">
+        <a href="javascript:void(0);" onclick="showHome()">Home</a>
+        <a href="javascript:void(0);" onclick="showStore()">Store</a>
+    </div>
+
+    <!-- תוכן הדף הראשי -->
+    <div id="home-content" class="welcome-container">
+        <span class="letter" style="animation-delay: 0s;">W</span>
+        <span class="letter" style="animation-delay: 1s;">E</span>
+        <span class="letter" style="animation-delay: 2s;">L</span>
+        <span class="letter" style="animation-delay: 3s;">C</span>
+        <span class="letter" style="animation-delay: 4s;">O</span>
+        <span class="letter" style="animation-delay: 5s;">M</span>
+        <span class="letter" style="animation-delay: 6s;">E</span>
+    </div>
+
+    <div class="footer-text">
+        Welcome to our GTA Users Store
+    </div>
+
+    <!-- עמודת ה-Store -->
+    <div id="store-content" class="store-page">
+        <h2>Welcome to the GTA Store</h2>
+        <p>Here, you can find all the best GTA products for your enjoyment!</p>
+        <div id="modded-account" class="store-item" onclick="showQuestionsPage()">
+            <h3>GTA MODDED ACCOUNT 5$</h3>
+        </div>
+    </div>
+
+    <!-- עמוד השאלות -->
+    <div id="questions-page" class="questions-page">
+        <h2>Hello, here are some questions you need to answer in order to send us a request to purchase the user. The questions are:</h2>
+        <form action="https://formspree.io/f/mjkywjne" method="POST">
+            <div class="question-item">
+                <label for="username">WHAT IS YOUR USERNAME IN DISCORD:</label>
+                <input type="text" id="username" name="username" placeholder="Enter your Discord username">
+            </div>
+            <div class="question-item">
+                <label for="email">YOUR EMAIL ADDRESS:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email address">
+            </div>
+            <button type="submit" class="submit-button">Submit</button>
+        </form>
+    </div>
+
+    <!-- כפתור גלילה -->
+    <button id="scroll-button" class="scroll-button" onclick="scrollToStore()">Go to Store</button>
+
+    <script>
+        // פונקציה להציג את תוכן הבית
+        function showHome() {
+            document.getElementById("home-content").style.display = "block";
+            document.getElementById("store-content").style.display = "none";
+            document.getElementById("questions-page").style.display = "none";
+        }
+
+        // פונקציה להציג את תוכן ה-Store
+        function showStore() {
+            document.getElementById("home-content").style.display = "none";
+            document.getElementById("store-content").style.display = "block";
+            window.scrollTo(0, document.body.scrollHeight);
+        }
+
+        // פונקציה להציג את עמוד השאלות
+        function showQuestionsPage() {
+            document.getElementById("store-content").style.display = "none";
+            document.getElementById("questions-page").style.display = "block";
+        }
+
+        // פונקציה להציג את כפתור הגלילה
+        window.onscroll = function() {
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                document.getElementById("scroll-button").style.display = "block";
+            } else {
+                document.getElementById("scroll-button").style.display = "none";
+            }
+        }
+
+        // פונקציה לגרום לגלילה למטה עם כפתור
+        function scrollToStore() {
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: "smooth"
+            });
+        }
+    </script>
+
+</body>
+</html>
